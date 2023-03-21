@@ -1,8 +1,8 @@
 let moviesList;
-let customTitle = document.querySelector("#title").innerHTML
-let customRating = document.querySelector("#rating").innerHTML
-let customGenre = document.querySelector("#genre").innerHTML
-let customDirector = document.querySelector("#director").innerHTML
+let customTitle = document.querySelector("#title")
+let customRating = document.querySelector("#rating")
+let customGenre = document.querySelector("#genre")
+let customDirector = document.querySelector("#director")
 // console.log(body.innerHTML);
 fetch("https://pinto-goldenrod-lettuce.glitch.me/movies").then(response =>
 {
@@ -13,7 +13,7 @@ fetch("https://pinto-goldenrod-lettuce.glitch.me/movies").then(response =>
     console.log(moviesList);
 
     function renderMovie(movie){
-        let html= `<p>${movie.title}</p>`
+        let html = `<p>${movie.title}</p>`
         return html;
     }
 
