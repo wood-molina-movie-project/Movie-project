@@ -1,14 +1,18 @@
 .secOne{
-    margin-top: 20px;
-    margin-right: 20px;
+    margin: 2rem;
     /*display: flex;*/
     /*justify-content: center;*/
     border: 2px solid black;
+    /*flex-direction: row-reverse;*/
+}
+
+.title{
+    display: inline-block;
 }
 
 .description{
     border: 2px solid red;
-    margin-left: 10px;
+    margin-left: 1rem;
     /*display: flex;*/
     /*justify-content: center;*/
 }
@@ -16,5 +20,16 @@
 .thisTwo{
     display: flex;
     align-self: center;
-    margin-top: 20px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.delete{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.holder{
+    display: flex;
+    justify-content: center;
 }
