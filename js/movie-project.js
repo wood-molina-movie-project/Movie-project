@@ -1,10 +1,10 @@
 var body = document.querySelector("#header")
 var list;
-fetch("https://pinto-goldenrod-lettuce.glitch.me/movies").then(response => {
-   list =  response.json
-    console.log(response.json())}).then(data => {
-    // body += data.map(id => `<p>${id.id}</p>`)})
+fetch("https://pinto-goldenrod-lettuce.glitch.me/movies").then(response =>
+{
+    response.json()
 
-    body = list.map(function(id) {
-        return (`<p>${id.id}</p>`)
+}).then(data => {
+    body = for(function(id) {
+        return (`<p>${id.movies.id}</p>`)
     })})
