@@ -1,9 +1,16 @@
+*{
+    margin: 0;
+    background-color: silver;
+}
+
+
 .secOne{
-    margin: 2rem;
+    margin-bottom: 1rem;
     /*display: flex;*/
     /*justify-content: center;*/
     border: 2px solid black;
     /*flex-direction: row-reverse;*/
+
 }
 
 .title{
@@ -11,7 +18,7 @@
 }
 
 .description{
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     margin-left: 1rem;
     /*display: flex;*/
     /*justify-content: center;*/
@@ -20,8 +27,8 @@
 .thisTwo{
     display: flex;
     align-self: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    /*margin-top: 2rem;*/
+    /*margin-bottom: 2rem;*/
 }
 
 .delete{
@@ -33,3 +40,12 @@
     display: flex;
     justify-content: center;
 }
+
+body{
+    background-color: darkgrey;
+}
+
+.mainTitle{
+    padding: 1rem;
+}
+
