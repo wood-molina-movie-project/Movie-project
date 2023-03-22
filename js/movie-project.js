@@ -77,26 +77,14 @@ function newMovie(e) {
     let comment = document.querySelector('#comment').value.toString()
     let director = document.querySelector('#director').value.toString()
     let rating = document.querySelector('#rating').value.toString()
-    // let length = moviesList.length
-    // let n = 0
-    // let lowerMovie = title.toLowerCase()
-    // for (let i = 0; i < length; i++) {
-    //     let movie = moviesList[i].title.toLowerCase()
-    //     if (movie === lowerMovie) {
-    //         n -= 1
-    //         break;
-    //     } else if (movie !== lowerMovie) {
-    //         n += 1
-    //         if (n !== length) {
-    //             continue;
-    //         } else if (n === length) {
+
     let tempMovie = {
         title,
         director,
         comment,
         rating
     }
-    //             moviesList.push(tempMovie)
+
     let options = {
         method: 'POST',
         headers: {
