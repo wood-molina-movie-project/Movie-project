@@ -1,18 +1,13 @@
 let id;
 let temporary = 0
-let temporary2 = 0
 let imagineId = []
-let moviesList;
 let deleteBtn = []
 const url = "https://pinto-goldenrod-lettuce.glitch.me/movies"
 
 fetch(url).then(response => {
     return response.json()
 }).then(function (data) {
-    moviesList = data
-    console.log(moviesList);
-}).then(function(){
-    document.querySelector("#body").innerHTML = renderMovies(moviesList)
+    document.querySelector("#body").innerHTML = renderMovies(data)
     document.querySelector(`#img-0`).innerHTML = `<img src="img%20/dip.jpeg.png">`
     document.querySelector(`#img-1`).innerHTML = `<img src="img%20/tcf.jpeg.png">`
     document.querySelector(`#img-2`).innerHTML = `<img src="img%20/tqm.jpeg">`
