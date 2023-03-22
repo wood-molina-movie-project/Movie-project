@@ -3,8 +3,9 @@ let temporary = 0
 let imagineId = []
 let deleteBtn = []
 const url = "https://pinto-goldenrod-lettuce.glitch.me/movies"
+const url2 = "https://relieved-twisty-trouser.glitch.me/movies"
 
-fetch(url).then(response => {
+fetch(url2).then(response => {
     return response.json()
 }).then(function (data) {
     document.querySelector("#body").innerHTML = renderMovies(data)
@@ -74,20 +75,20 @@ function newMovie(e) {
     let rating = document.querySelector('#rating').value.toString()
 
     let tempMovie = {
-        title,
-        director,
-        comment,
-        rating
+        title:title,
+        direcetor:director,
+        rating:rating,
+        comment:comment
     }
 
     let options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(tempMovie),
+        body: JSON.stringify(tempMovie)
     };
-    fetch(url, options)
+    fetch(url2,options)
         .then(response => console.log(response))
         .catch(error => console.error(error));
     document.querySelector("#body").innerHTML += renderNewMovie(tempMovie)
@@ -99,7 +100,7 @@ function deleteMovie(event) {
     console.log('i got this far')
     if (event.target.id === 'delete-1') {
         console.log('it is doing somthing')
-        fetch(`https://pinto-goldenrod-lettuce.glitch.me/movies`, {
+        fetch(url, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
@@ -110,9 +111,9 @@ function deleteMovie(event) {
     }
 }
 
-// let addBtn = document.querySelector(`#add`)
+// let addBtn = document.querySelector("#add")
 // addBtn.addEventListener('click', newMovie)
-// deleteBtn.forEach(function (btn) {
-//     return btn.addEventListener('click', deleteBtn)
-// })
+deleteBtn.forEach(function (btn) {
+    return btn.addEventListener('click', deleteMovie)
+})
 
