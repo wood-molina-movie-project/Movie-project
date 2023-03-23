@@ -5,6 +5,7 @@ let deleteBtn = []
 const url = "https://pinto-goldenrod-lettuce.glitch.me/movies"
 const url2 = "https://relieved-twisty-trouser.glitch.me/movies"
 
+
 fetch(url2).then(response => {
     return response.json()
 }).then(function (data) {
@@ -24,6 +25,11 @@ fetch(url2).then(response => {
     document.querySelector(`#img-12`).innerHTML = `<img src="img%20/tho.jpg">`
     let addBtn = document.querySelector(`#add`)
     addBtn.addEventListener('click', newMovie)
+    for(let i = 0; i < data.length; ++i){
+        deleteBtn[i] = document.querySelector(`#delete-${i}`)
+        deleteBtn[i].addEventListener("click", deleteMovie)
+    }
+    console.log(deleteBtn)
 })
 
 function renderMovie(movie) {
@@ -38,7 +44,6 @@ function renderMovie(movie) {
 
     html += `</div>`
     html += `<div class="holder"><p class="rating">${movie.rating}</p></div></section>`
-    deleteBtn += document.querySelector(`#delete-${id}`)
     return html;
 }
 
@@ -49,6 +54,7 @@ function renderMovies(movies) {
         imagineId[i] = `img-${i}`
         temporary = imagineId[i]
         html += renderMovie(movies[i]);
+
     }
     return html;
 }
@@ -62,7 +68,7 @@ function renderNewMovie(movie) {
     html += `<h4 class="title">${movie.title}</h4>`
     html += `<p>${movie.comment}</p></div>`
     html += `</div>`
-    html += `<div class="holder"><p class="rating">${movie.rating}</p></div></section>`
+    html += `<div class="holder"><p class="rating">${movie.rating}</p></div></div></section>`
     deleteBtn += document.querySelector(`#delete-${id}`)
     return html;
 }
@@ -96,10 +102,11 @@ function newMovie(e) {
 }
 
 function deleteMovie(event) {
-    event.preventDefault()
+    // event.preventDefault()
     console.log('i got this far')
-    if (event.target.id === 'delete-1') {
-        console.log('it is doing somthing')
+    console.log(event.target.id)
+    if (event.target.id === 'delete-20') {
+        console.log('it is doing something')
         fetch(url, {
             method: "DELETE",
             headers: {
@@ -113,7 +120,9 @@ function deleteMovie(event) {
 
 // let addBtn = document.querySelector("#add")
 // addBtn.addEventListener('click', newMovie)
-deleteBtn.forEach(function (btn) {
-    return btn.addEventListener('click', deleteMovie)
-})
+// deleteBtn.forEach(function (btn) {
+//     btn.addEventListener('click', deleteMovie)
+// })
+
+
 
