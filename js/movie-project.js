@@ -1,15 +1,104 @@
-let id;
 let temporary = 0
 let imagineId = []
 let deleteBtn = []
-const url = "https://pinto-goldenrod-lettuce.glitch.me/movies"
+let editBtn = []
+let addBtn;
 const url2 = "https://relieved-twisty-trouser.glitch.me/movies"
-
+let list;
+//pageload behavior:
 
 fetch(url2).then(response => {
     return response.json()
 }).then(function (data) {
+    list=data
     document.querySelector("#body").innerHTML = renderMovies(data)
+    poster()
+    renderFunctions()
+    renderFunctions2()
+})
+
+//function declarations
+function deleteEvent(event) {
+    event.preventDefault()
+    fetch(url2 + '/' + event.target.firstChild.id, {
+        method: "DELETE",
+        headers: {
+            "content-type": "application/json",
+            accept: "application/json"
+        }
+    })
+    event.target.parentElement.parentElement.style.display = 'none'
+}
+
+function editEvent(event){
+    let changeTitle = prompt(`Change Title?`)
+    if (changeTitle !== null) {
+        fetch(url2 + '/' + event.target.firstChild.id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json"
+            },
+            body: JSON.stringify({title: changeTitle})
+        })
+    }
+    let changeDesc = prompt(`Change Description?`)
+    if (changeDesc !== null) {
+        fetch(url2 + '/' + event.target.firstChild.id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json"
+            },
+            body: JSON.stringify({comment: changeDesc})
+        })
+    }
+    let changeRating = prompt(`Change Rating?`)
+    if (changeRating !== null) {
+        fetch(url2 + '/' + event.target.firstChild.id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json"
+            },
+            body: JSON.stringify({rating: changeRating})
+        })
+    }
+    let changeGenre = prompt(`Change Genre?`)
+    if (changeGenre !== null) {
+        fetch(url2 + '/' + event.target.firstChild.id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json"
+            },
+            body: JSON.stringify({genre: changeGenre})
+        })
+    }
+    fetch(url2).then(response => {
+        return response.json()
+    }).then(function (data) {
+        listLength=data
+        document.querySelector("#body").innerHTML = renderMovies(data)
+        poster()
+        renderFunctions()
+        renderFunctions2()
+    })
+}
+
+function renderFunctions(){
+    addBtn = document.querySelector(`#add`)
+    addBtn.addEventListener('click', newMovie)}
+function renderFunctions2(){
+    for (let i = 0; i < list.length; ++i) {
+        deleteBtn[i] = document.querySelector(`#delete-${i}`)
+        deleteBtn[i].addEventListener("click", deleteEvent)
+        editBtn[i] = document.querySelector(`#edit-${i}`)
+        editBtn[i].addEventListener('click', editEvent)
+    }
+}
+
+function poster() {
     document.querySelector(`#img-0`).innerHTML = `<img src="img%20/dip.jpeg.png">`
     document.querySelector(`#img-1`).innerHTML = `<img src="img%20/tcf.jpeg.png">`
     document.querySelector(`#img-2`).innerHTML = `<img src="img%20/tqm.jpeg">`
@@ -23,53 +112,32 @@ fetch(url2).then(response => {
     document.querySelector(`#img-10`).innerHTML = `<img src="img%20/sb.jpeg">`
     document.querySelector(`#img-11`).innerHTML = `<img src="img%20/spr.jpg">`
     document.querySelector(`#img-12`).innerHTML = `<img src="img%20/tho.jpg">`
-    let addBtn = document.querySelector(`#add`)
-    addBtn.addEventListener('click', newMovie)
-    for(let i = 0; i < data.length; ++i){
-        deleteBtn[i] = document.querySelector(`#delete-${i}`)
-        deleteBtn[i].addEventListener("click", deleteMovie)
-    }
-    console.log(deleteBtn)
-})
+}
 
 function renderMovie(movie) {
 
-    let html = `<section class="secOne">`
-    html += `<div class="delete"><button id="delete-${id}">X</button></div>`
+    let html = `<section id='${movie.id}' class="secOne">`
+    html += `<div class="delete"><button id="delete-${movie.id}" type="button"><span class="d-none" id="${movie.id}">hide me later: objectid: ${movie.id}</span>X</button></div>`
     html += `<div class="container-sm thisTwo">`
     html += `<a id="${temporary}" href="https://placeholder.com"><img src="https://via.placeholder.com/200"></a>`
     html += `<div class="description">`
-    html += `<h4 class="title">${movie.title}</h4>`
-    html += `<p>${movie.comment}</p></div>`
-
+    html += `<h3 class="title">${movie.title}</h3>`
+    html += `<h6 class="sub-title">Directied by: ${movie.director}</h6>`
+    html += `<p>${movie.comment}</p><hr><span>Genre: ${movie.genre}</span></div>`
     html += `</div>`
-    html += `<div class="holder"><p class="rating">${movie.rating}</p></div></section>`
+    html += `<div class="container"><hr><div class="holder"><p class="rating">${movie.rating}</p></div></div>`
+    html += `<div class="edit"><button id="edit-${movie.id}"><span class="d-none" id="${movie.id}">hide me later: objectid: ${movie.id}</span>Edit</button></div></section>`
     return html;
+
 }
 
 function renderMovies(movies) {
     let html = '';
     for (let i = 0; i < movies.length; i++) {
-        id = i
         imagineId[i] = `img-${i}`
         temporary = imagineId[i]
         html += renderMovie(movies[i]);
-
     }
-    return html;
-}
-
-function renderNewMovie(movie) {
-    let html = `<section class="secOne">`
-    html += `<div class="delete"><button id="delete-${++id}">X</button></div>`
-    html += `<div class="container-sm thisTwo">`
-    html += `<a id="${temporary}" href="https://placeholder.com"><img src="https://via.placeholder.com/200"></a>`
-    html += `<div class="description">`
-    html += `<h4 class="title">${movie.title}</h4>`
-    html += `<p>${movie.comment}</p></div>`
-    html += `</div>`
-    html += `<div class="holder"><p class="rating">${movie.rating}</p></div></div></section>`
-    deleteBtn += document.querySelector(`#delete-${id}`)
     return html;
 }
 
@@ -81,10 +149,10 @@ function newMovie(e) {
     let rating = document.querySelector('#rating').value.toString()
 
     let tempMovie = {
-        title:title,
-        direcetor:director,
-        rating:rating,
-        comment:comment
+        title: title,
+        direcetor: director,
+        rating: rating,
+        comment: comment
     }
 
     let options = {
@@ -94,35 +162,17 @@ function newMovie(e) {
         },
         body: JSON.stringify(tempMovie)
     };
-    fetch(url2,options)
+    fetch(url2, options)
         .then(response => console.log(response))
         .catch(error => console.error(error));
-    document.querySelector("#body").innerHTML += renderNewMovie(tempMovie)
-    console.log(tempMovie);
+    fetch(url2).then(response => {
+        return response.json()
+    }).then(function (data) {
+        listLength=data
+        document.querySelector("#body").innerHTML = renderMovies(data)
+        poster()
+        renderFunctions()
+        renderFunctions2()
+
+    })
 }
-
-function deleteMovie(event) {
-    // event.preventDefault()
-    console.log('i got this far')
-    console.log(event.target.id)
-    if (event.target.id === 'delete-20') {
-        console.log('it is doing something')
-        fetch(url, {
-            method: "DELETE",
-            headers: {
-                "content-type": "application/json",
-                accept: "application/json"
-            }
-        })
-
-    }
-}
-
-// let addBtn = document.querySelector("#add")
-// addBtn.addEventListener('click', newMovie)
-// deleteBtn.forEach(function (btn) {
-//     btn.addEventListener('click', deleteMovie)
-// })
-
-
-

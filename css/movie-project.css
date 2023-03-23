@@ -49,3 +49,6 @@ body{
     padding: 1rem;
 }
 
+.d-none {
+    display: none;
+}
